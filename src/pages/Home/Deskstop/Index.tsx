@@ -2,6 +2,7 @@
 import "./styles.home.scss";
 import { DeskstopStyles } from "../../../styles/DeskopHome";
 import colors from "../../../assets/colors";
+import { useState, useEffect } from "react";
 
 //import icons
 import { BsSearch } from "react-icons/bs";
@@ -31,65 +32,91 @@ import Reviews from "../../../components/Reviews";
 
 const Home = () => {
   const matches = useMediaQuery("(min-width:600px)");
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPreloader(false);
+    }, 4000);
+  }, []);
 
   return (
-    <DeskstopStyles isDesktop={matches}>
-      <Header />
-      <div className="header_body">
-        <div className="classical">
-          A Classical Education <br />
-          for the Future
+    <>
+      {showPreloader ? (
+        <div className='preloader_parent'>
+          <div className='preloader_'>
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div className='flash'>Fountain</div>
         </div>
-        <div className="prepare">
-          We prepare you to engage in the world that is and to help bring
-          <br /> about a world that ought to be
-        </div>
-        <div className="btn">
-          <Button height="62px" width="162px" color={colors.primary}>
-            Get Started
-          </Button>
-        </div>
-      </div>
-
-      {
-        <div className="actions_types">
-          <div className="action_types_box">
-            <div className="action_box">
-              <Rounded isDestop={matches}>
-                <img src={Chat} alt="chat" />
-              </Rounded>
-              <div className="action_text">Live Chat</div>
+      ) : (
+        <DeskstopStyles isDesktop={matches}>
+          <Header />
+          <div className="header_body">
+            <div className="classical">
+              A Classical Education <br />
+              for the Future
             </div>
-
-            <div className="action_box">
-              <Rounded isDestop={matches}>
-                <img src={Exams} alt="exmanition" />
-              </Rounded>
-              <div className="action_text">Examination</div>
+            <div className="prepare">
+              We prepare you to engage in the world that is and to help bring
+              <br /> about a world that ought to be
             </div>
-
-            <div className="action_box">
-              <Rounded isDestop={matches}>
-                <img src={Profile} alt="profile" />
-              </Rounded>
-              <div className="action_text">Competition</div>
+            <div className="btn">
+              <Button height="62px" width="162px" color={colors.primary}>
+                Get Started
+              </Button>
             </div>
           </div>
-        </div>
-      }
 
-      <Categories />
-      <Experts />
-      <Courses />
-      <Examination />
-      <PopularExamination />
-      <Scholars />
-      <Competition />
-      <Publications />
-      <RecentExamination />
-      <Reviews />
-      <Footer />
-    </DeskstopStyles>
+          {
+            <div className="actions_types">
+              <div className="action_types_box">
+                <div className="action_box">
+                  <Rounded isDestop={matches}>
+                    <img src={Chat} alt="chat" />
+                  </Rounded>
+                  <div className="action_text">Live Chat</div>
+                </div>
+
+                <div className="action_box">
+                  <Rounded isDestop={matches}>
+                    <img src={Exams} alt="exmanition" />
+                  </Rounded>
+                  <div className="action_text">Examination</div>
+                </div>
+
+                <div className="action_box">
+                  <Rounded isDestop={matches}>
+                    <img src={Profile} alt="profile" />
+                  </Rounded>
+                  <div className="action_text">Competition</div>
+                </div>
+              </div>
+            </div>
+          }
+
+          <Categories />
+          <Experts />
+          <Courses />
+          <Examination />
+          <PopularExamination />
+          <Scholars />
+          <Competition />
+          <Publications />
+          <RecentExamination />
+          <Reviews />
+          <Footer />
+        </DeskstopStyles>
+      )}
+    </>
   );
 };
 
